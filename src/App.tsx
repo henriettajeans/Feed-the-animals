@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import './App.scss';
+import { Animals } from './components/animals/animals';
+import { Nav } from './components/nav/nav';
+import { allAnimals } from './models/classAnimals';
+import { IAnimal } from './models/IAnimal';
+
+export type AnimalContext = {
+  animals: allAnimals[];
+  showAnimal(p: IAnimal): void;
+};
 
 function App() {
+  const [animals, setAnimals] = useState<allAnimals[]>([]);
+
+  const showAnimal = (animal: IAnimal) => {
+    setAnimals([...animals, new allAnimals(animal, animal.id)]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav/>
+      <Outlet context= {{ showAnimal }}></Outlet>
     </div>
   );
 }

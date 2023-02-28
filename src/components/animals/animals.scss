@@ -1,0 +1,20 @@
+.html-component{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+    height: 100%;
+    justify-content: center;
+
+    .component{
+        width:400px;
+        margin:20px;
+        
+            &__img{
+                width: 330px;
+                &__src{
+                    width: 330px;
+                }
+            }
+        }
+    
+}
