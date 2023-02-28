@@ -15,12 +15,15 @@ export const Animal =(()=>{
             setAnimal(response);
         }
         const rightNow = new Date();
-        const previousFeedTime = localStorage.getItem(animal?.id!);
+        const previousFeedTime = localStorage.getItem(animal?.id!,);
          const previous = new Date(previousFeedTime!);
 
+//rightNow.toString()
+
     function handleClick(){
-           let loggedTime : any = window.localStorage.setItem(animal?.id!, rightNow.toString());
+           let loggedTime : any = window.localStorage.setItem(animal?.id!, JSON.stringify(rightNow));
         if (previous.getHours() + 3 < rightNow.getHours()){
+            console.log("Is being logged")
             return(
                 <div>
                     {animal?.isFed && <p>{loggedTime}</p>}
