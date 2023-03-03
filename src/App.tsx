@@ -1,29 +1,51 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
-import { Animals } from './components/animals/animals';
+import { Outlet } from 'react-router-dom';
+import { IAnimalDetails } from './models/IAnimalDetails';
+import { getAnimals } from './services/getZooAnimals';
 import { Nav } from './components/nav/nav';
-import { allAnimals } from './models/classAnimals';
-import { IAnimal } from './models/IAnimal';
 
-export type AnimalContext = {
-  animals: allAnimals[];
-  showAnimal(p: IAnimal): void;
-};
-
+export interface IZooContext {
+  animals: IAnimalDetails;
+  animal: IAnimalDetails[];
+  updateFeedTime(animal: IAnimalDetails):void;
+}
 function App() {
-  const [animals, setAnimals] = useState<allAnimals[]>([]);
+  const [animals, setAnimals] = useState<IAnimalDetails[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  useEffect(()=>{
+    const getTheZoo = async () => {
+      let animals = await getAnimals();
+      setAnimals(animals);
+      setIsLoading(true);
+    }
+    let dataFromLS = localStorage.getItem("animals");
+    if(dataFromLS && !isLoading){
+      setAnimals(JSON.parse(dataFromLS));
+      setIsLoading(true);
+      return;
+    }
+    else {
+      if(!isLoading)
+      getTheZoo();
+    }
+    localStorage.setItem("animals", JSON.stringify(animals));
+  })
 
-  const showAnimal = (animal: IAnimal) => {
-    setAnimals([...animals, new allAnimals(animal, animal.id)]);
-  };
-
+  const updateFeedTime = (animal:IAnimalDetails) => {
+    let date = new Date();
+    let curTime = date.getHours()+":"+date.getMinutes();
+    let updatedList = animals.map((updated)=>animal.id===updated.id ? {...updated, lastFed: curTime, isFed:true}: updated);
+    setAnimals(updatedList);
+  }
   return (
-    <div className="App">
-      <Nav/>
-      <Outlet context= {{ showAnimal }}></Outlet>
-    </div>
-  );
+  <>
+      <div className="main">
+        <Nav/>
+          <Outlet context = {{animals, updateFeedTime}} />
+      </div>
+  </>
+  )
 }
 
 export default App;

@@ -8,7 +8,7 @@ export const Nav =() => {
                 <li className="nav-container__flex__list__item">
                 <Link to="/" className="nav-container__flex__list__item__link">Hem</Link></li>
                 <li className="nav-container__flex__list__item">
-                <Link to="/animals" className="nav-container__flex__list__item__link">Djurpark</Link></li>
+                <Link to="/zoo" className="nav-container__flex__list__item__link">Djurpark</Link></li>
             </ul>
         </nav>
      </div>

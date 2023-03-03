@@ -1,8 +1,3 @@
 export const Home =()=>{
-
-    return(
-        <>
-            <h1>Välkommen till Sollentuna hemmazoo!</h1>
-        </>
-    );
+    return(<h1>Home works</h1>)
 }

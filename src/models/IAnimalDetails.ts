@@ -1,4 +1,5 @@
-export interface IAnimal {
+export interface IAnimalDetails {
+    map: any;
     id: string,
     name: string,
     latinName: string,
@@ -8,11 +9,4 @@ export interface IAnimal {
     medicine: string,
     isFed: boolean, 
     lastFed: string
-}
-
-export interface IAnimalIntro {
-    imageUrl: string | undefined
-    id: string,
-    name: string,
-    imgUrl: string
 }
