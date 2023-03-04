@@ -1,25 +1,106 @@
+@use '../../styling/mixins' as m;
+@use '../../styling/variables' as v;
+
 .animal-component{
     width:100%;
-    margin: 10%;
-
-    &__img{
-        width: 90%;
-        &__src{
-            width: 100%;
-        }
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: v.$rosy-brown;
+    &__title{
+        font-size: 2em;
+        font-family: v.$fine;
+        color: v.$rosy-light;
     }
-    &__flex{
-        &__title{
 
+   
+    &__flex{
+        align-items: center;
+        &__img{
+            margin-top: 10%;
+            width: 90%;
+            font-family: v.$hand;
+            font-size: 2em;
+            // align-items: center;
+            &__src{
+                width: 100%;
+                border-radius: 10%;
+            }
         }
+        &__column{
+            background-color: v.$rosy-light;
+            padding: 10%;
+            margin-bottom: 5%;
+           
         &__timespan{
+            text-align: center;
+            font-family: v.$hand;
+            margin-bottom: 5%;
 
         }
         &__not{
-
+            padding: 5%;
+            background-color: v.$button;
+            font-size: 1.4em;
+            border-radius: 25%;
+            margin-left: 30%;
+            margin-bottom: 7%;
         }
         &__active{
-            
+            color: red;
+        }
+        &__latin{
+            font-family: v.$hand;
+            text-align: center;
+            margin-bottom: 9%;
+            font-size: 1.4em;
+            &__text{
+                font-family: v.$fine;
+            }
+
+        }
+        &__desc{
+            width:80%;
+            text-align: center;
+            margin-left: 8%;
+            font-family: v.$bread;
+
         }
     }
+}
+        @include m.desktop{
+            .animal-component{
+                &__title{
+                    font-size: 4em;
+                        font-family: v.$fine;
+                }
+            &__flex{
+                margin: 5%;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 2%;
+                align-items:flex-start;
+                &__img{
+                    width: 50%;
+                    margin-left: 3%;
+                    &__src{
+                        width: 95%;
+                        border-radius: 4px;
+                    }
+                }
+            
+
+                &__column{
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 50%;
+                    margin-right: 3%;
+                    border-radius: 5%;
+                }
+            }
+        }
+    }    
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { IZooContext } from "../../App";
 import { IAnimalDetails } from "../../models/IAnimalDetails";
-import './animalDetails';
+import './animalDetails.scss';
 
 export const AnimalDetails = () => {
   const [isFed, setIsFed] = useState(false);
@@ -15,11 +15,11 @@ export const AnimalDetails = () => {
     const storedTime = localStorage.getItem(String(id)); // TODO: Same ID all the time now
 
     if (storedTime === null) {
-      setFedTime("Djuret har aldrig matats")
+      setFedTime(" - djuret har aldrig matats")
     } else {
       const ts = Date.parse(storedTime);
       if (isNaN(ts)) {
-        setFedTime("Djuret har aldrig matats")
+        setFedTime(" - djuret har aldrig matats")
         return;
       }
       checkIfNeedsFood(storedTime);
@@ -59,20 +59,21 @@ export const AnimalDetails = () => {
     if (id == animal.id) {
       return (
         <div className="animal-component" key={animal.id}>
-
-          <div className="animal-component__img">
-            <img src={animal.imageUrl} alt={animal.name} className="animal-component__img__src" />
-
-          </div>
+          <h3 className="animal-component__title">Välkommen in till {animal.name}</h3>
           <article className="animal-component__flex">
-            <div className="">
-              <h3 className="animal-component__flex__title">Välkommen in till {animal.name}</h3>
-              <span className="animal-component__flex__timespan">{animal.name} blev senast matad {fedTime}</span>
+            <div className="animal-component__flex__img">
+              <img src={animal.imageUrl} alt="Bilden saknas" className="animal-component__flex__img__src" />
+
+            </div>
+            <div className="animal-component__flex__column">
+              <p className="animal-component__flex__column__timespan">{animal.name} blev senast matad {fedTime}</p>
               {animal.isFed ?
-                <button className="animal-component__flex__not"
+                <button className="animal-component__flex__column__not"
                   disabled={isFed}
-                  onClick={() => { handleClick(animal) }}>Djuret är mätt</button> :
-                <button className="animal-component__flex__active" onClick={() => { handleClick(animal) }}>Mata djuret</button>}
+                  onClick={() => { handleClick(animal) }}>Mata {animal.name}</button> :
+                <button className="animal-component__flex__column__active" onClick={() => { handleClick(animal) }}>Mata djuret</button>}
+              <p className="animal-component__flex__column__latin">Djurets latinska namn: <span className="animal-component__flex__column__latin__text">{animal.latinName}</span></p>
+              <p className="animal-component__flex__column__desc">{animal.longDescription}</p>
             </div>
           </article>
         </div>

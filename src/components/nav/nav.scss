@@ -1,0 +1,20 @@
+@use '../../styling/variables' as v;
+
+.nav-container{
+    height: 75px;
+    background-color: v.$rosy-brown;
+    &__list{
+        display: flex;
+        justify-content: space-around;
+        &__item{
+            list-style: none;
+            font-family: v.$bread;
+            &__link{
+                text-decoration: none;
+                color: pink;
+                font-size: 1.2em;
+                
+            }
+        }
+    }
+}

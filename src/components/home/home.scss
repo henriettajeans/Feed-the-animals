@@ -1,0 +1,32 @@
+@use '../../styling/variables' as v;
+
+.home-component{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100vh;
+    margin-left: 4%;
+    margin-right: 3%;
+    margin-top: 20%;
+    text-align: center;
+    &__title{
+        font-size: 4.5em;
+        font-family: v.$fine;
+        color:  v.$atomic-tangerine;
+    }
+    &__container{
+        margin-top: 20%;
+        &__text{
+            font-size: 1.3em;
+            color: v.$rosy-brown;
+            font-family: v.$bread;
+        }
+        &__link{
+            margin-top: 25%;
+            text-decoration: none;
+            font-size: 2em;
+            font-family: v.$fine;
+            color: v.$atomic-tangerine;
+        }
+    }
+}
