@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { IZooContext } from "../../App";
 import { IAnimalDetails } from "../../models/IAnimalDetails";
-import { getAnimals } from "../../services/getZooAnimals";
+import './animalDetails';
 
 export const AnimalDetails = () => {
   const [isFed, setIsFed] = useState(false);
@@ -58,20 +58,23 @@ export const AnimalDetails = () => {
   let html = animals.map((animal: IAnimalDetails) => {
     if (id == animal.id) {
       return (
-        <div className="" key={animal.id}>
-          <div className="">
-            <h3>Välkommen in till {animal.name}</h3>
-            <span>{animal.name} blev senast matad {fedTime}</span>
+        <div className="animal-component" key={animal.id}>
+
+          <div className="animal-component__img">
+            <img src={animal.imageUrl} alt={animal.name} className="animal-component__img__src" />
 
           </div>
-          <div className="">
-            <img src={animal.imageUrl} alt={animal.name} className="component__img" />
-            {animal.isFed ?
-              <button className="notHungry"
-                disabled={isFed}
-                onClick={() => { handleClick(animal) }}>Djuret är mätt</button> :
-              <button className="isHungry" onClick={() => { handleClick(animal) }}>Mata djuret</button>}
-          </div>
+          <article className="animal-component__flex">
+            <div className="">
+              <h3 className="animal-component__flex__title">Välkommen in till {animal.name}</h3>
+              <span className="animal-component__flex__timespan">{animal.name} blev senast matad {fedTime}</span>
+              {animal.isFed ?
+                <button className="animal-component__flex__not"
+                  disabled={isFed}
+                  onClick={() => { handleClick(animal) }}>Djuret är mätt</button> :
+                <button className="animal-component__flex__active" onClick={() => { handleClick(animal) }}>Mata djuret</button>}
+            </div>
+          </article>
         </div>
       )
     }
