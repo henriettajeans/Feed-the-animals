@@ -29,7 +29,7 @@ function App() {
       if(!isLoading)
       getTheZoo();
     }
-    localStorage.setItem("animals", JSON.stringify(animals));
+    // localStorage.setItem("animals", JSON.stringify(animals));
   })
 
   const updateFeedTime = (animal:IAnimalDetails) => {
