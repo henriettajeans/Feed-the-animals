@@ -29,7 +29,7 @@ function App() {
       if (!isLoading)
         getTheZoo();
     }
-  })
+  }, [])
 
   const updateFeedTime = (animal: IAnimalDetails) => {
     let date = new Date();

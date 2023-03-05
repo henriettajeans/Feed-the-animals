@@ -9,7 +9,6 @@ export const AnimalDetails = () => {
   const [fedTime, setFedTime] = useState("");
   const { id } = useParams();
   const { animals, updateFeedTime } = useOutletContext<IZooContext>();
-  const [animal, setAnimals] = useState();
 
   useEffect(() => {
     const storedTime = localStorage.getItem(String(id)); // TODO: Same ID all the time now
@@ -27,11 +26,12 @@ export const AnimalDetails = () => {
   }, []);
 
   function checkIfNeedsFood(lastFed: string) {
+    console.log("check if need food")
 
     const lastFedDate = new Date(lastFed);
     console.log(lastFedDate);
     const rightNow = new Date();
-    setFedTime(lastFedDate.getHours() + ":" + lastFedDate.getMinutes());
+    setFedTime(lastFedDate.toLocaleDateString() + " " + lastFedDate.getHours() + ":" + lastFedDate.getMinutes());
 
     const timeDiffInMs = rightNow.getTime() - lastFedDate.getTime();
     const timeDiffInSeconds = timeDiffInMs / 1000;
@@ -43,18 +43,18 @@ export const AnimalDetails = () => {
     } else {
       setIsFed(true);
     }
-
   }
+
   const handleClick = (animal: IAnimalDetails) => {
     const rightNow = new Date();
     window.localStorage.setItem(`${id}`, rightNow.toString());
     setIsFed(true);
-    let curTime = rightNow.getHours() + ":" + rightNow.getMinutes();
+    // let curTime = rightNow.getTime() 
+    let curTime = rightNow.toLocaleDateString() + " " + rightNow.getHours() + ":" + rightNow.getMinutes();
     setFedTime(curTime);
     updateFeedTime(animal);
-
-
   }
+
   let html = animals.map((animal: IAnimalDetails) => {
     if (id == animal.id) {
       return (
@@ -62,7 +62,7 @@ export const AnimalDetails = () => {
           <h3 className="animal-component__title">Välkommen in till {animal.name}</h3>
           <article className="animal-component__flex">
             <div className="animal-component__flex__img">
-              <img src={animal.imageUrl} alt="Bilden saknas" className="animal-component__flex__img__src" />
+              <img src={animal.imageUrl} alt={animal.name} className="animal-component__flex__img__src" />
 
             </div>
             <div className="animal-component__flex__column">
