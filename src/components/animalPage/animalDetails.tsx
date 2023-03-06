@@ -11,7 +11,7 @@ export const AnimalDetails = () => {
   const { animals, updateFeedTime } = useOutletContext<IZooContext>();
 
   useEffect(() => {
-    const storedTime = localStorage.getItem(String(id)); // TODO: Same ID all the time now
+    const storedTime = localStorage.getItem(String(id));
 
     if (storedTime === null) {
       setFedTime(" - djuret har aldrig matats")
@@ -26,11 +26,13 @@ export const AnimalDetails = () => {
   }, []);
 
   function checkIfNeedsFood(lastFed: string) {
-    console.log("check if need food")
-
     const lastFedDate = new Date(lastFed);
     console.log(lastFedDate);
     const rightNow = new Date();
+    setFedTime(lastFedDate.getHours() + ":" + lastFedDate.getMinutes());
+
+    // const lastFedDate = new Date(lastFed);
+    // const rightNow = new Date();
     setFedTime(lastFedDate.toLocaleDateString() + " " + lastFedDate.getHours() + ":" + lastFedDate.getMinutes());
 
     const timeDiffInMs = rightNow.getTime() - lastFedDate.getTime();
@@ -51,6 +53,7 @@ export const AnimalDetails = () => {
     setIsFed(true);
     // let curTime = rightNow.getTime() 
     let curTime = rightNow.toLocaleDateString() + " " + rightNow.getHours() + ":" + rightNow.getMinutes();
+    // let curTime = rightNow.getHours() + ":" + rightNow.getMinutes();
     setFedTime(curTime);
     updateFeedTime(animal);
   }

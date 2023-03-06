@@ -15,9 +15,9 @@ export const ZooAnimals = () => {
                 </div>
                 <h3 className="zoo-component__name">{animal.name}</h3>
                 <p className="zoo-component__desc">{animal.shortDescription}</p>
-                <section className="zoo-component__button">
-                    <Link to={`/animal/${animal.id}`} className="zoo-component__button__link">Mata</Link>
-                </section>
+
+                <Link to={`/animal/${animal.id}`} className="zoo-component__button__link"><section className="zoo-component__button">Mata</section></Link>
+
             </article>
         )
     })
